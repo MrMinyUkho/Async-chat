@@ -25,7 +25,7 @@ class ServerProtocol(asyncio.Protocol):
 	def SendHistory(self):
 		if len(self.server.HistoryMessage) != 0:
 			self.transport.write(f"Привет, {self.login}!\nПредыдущие сообщения:\n".encode())
-			for message in self.server.HistoryMessage:
+			for message in self.server.HistoryMessage[-10:]:
 				self.transport.write(message.encode())
 
 	def data_received(self, data: bytes):
